@@ -21,17 +21,51 @@
    result += n % multiplikator;
    return result;
  }
- int index = 0;
  int get_ways(unsigned long p){
-
-   int number = 0;
-   if(p == 2||p== 3||p==5||p==7)
+   int ways = 0;
+   if(p < 10)
    {
-     return ++number;
-   }else{
-     p = remove_digit(index,p);
-     number += get_ways(p);
+     if(check_prime_number(p))
+     {
+       return 1;
+     }
+     return 0;
    }
-
-   return number;
+    int count = 0;
+    int length = get_length(p);
+    while (count < length) {
+      long n = remove_digit(count,p);
+      if(check_prime_number(n))
+      {
+        int aa = get_ways(n);
+        ways += aa;
+      }
+      count++;
+    }
+   return ways;
  }
+ bool check_prime_number(unsigned long number)
+ {
+   long divison = 2;
+   long primeNumber = number;
+
+   while(primeNumber % divison != 0 && primeNumber != 1)
+   {
+       divison++;
+   }
+   if (primeNumber == divison)
+   {
+       return true;
+   }
+   return false;
+ }
+int get_length(unsigned long number)
+{
+  int count_length = 0;
+  int shortend_number = 0;
+  do{
+    count_length++;
+    shortend_number = number/pow(10,count_length);
+  }while(shortend_number != 0);
+  return count_length;
+}
