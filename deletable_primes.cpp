@@ -37,8 +37,8 @@
       long n = remove_digit(count,p);
       if(check_prime_number(n))
       {
-        int aa = get_ways(n);
-        ways += aa;
+        int the_way = get_ways(n);
+        ways += the_way;
       }
       count++;
     }
